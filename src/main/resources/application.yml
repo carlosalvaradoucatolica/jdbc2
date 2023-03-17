@@ -1,0 +1,15 @@
+spring:
+  main:
+    banner-mode: console
+
+  logging:
+    pattern:
+      dateformat: hh:mm
+    level:
+      org:
+        hibernate:
+          SQL: debug
+          type:
+            descriptor:
+              sql:
+                BasicBinder: trace

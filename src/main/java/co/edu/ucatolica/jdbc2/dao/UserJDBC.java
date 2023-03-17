@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserJDBC {
-    private static final String SQL_SELECT = "SELECT id, username, password"
+    private static final String SQL_SELECT = "SELECT *"
             + "FROM user";
 
-    private static final String SQL_SELECT_BY_ID = "SELECT id, username, password"
-            + "FROM user WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM user u WHERE u.id = ?";
 
     private static final String SQL_INSERT = "INSERT INTO user(username, password)"
             +"VALUES(?, ?);";

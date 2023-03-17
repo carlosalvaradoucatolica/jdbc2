@@ -3,6 +3,7 @@ package co.edu.ucatolica.jdbc2;
 import co.edu.ucatolica.jdbc2.dao.UserJDBC;
 import co.edu.ucatolica.jdbc2.domain.User;
 import co.edu.ucatolica.jdbc2.util.Response;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,11 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "/api")
 public class Controller {
-    private UserJDBC jdbc;
+
 
     @GetMapping("/list")
     public ResponseEntity<Response> getUsuarios() {
-        List<User> users = jdbc.listar();
+        List<User> users = new UserJDBC().listar();
 
         return  new ResponseEntity<Response>(
                 Response.builder()
@@ -35,7 +36,7 @@ public class Controller {
     @GetMapping("get/{id}")
     public ResponseEntity<Response> getUsuarioById(@PathVariable Integer id) {
 
-            User usuario = jdbc.encontrar(new User(id));
+            User usuario = new UserJDBC().encontrar(new User(id));
 
             if (usuario != null){
                 return  new ResponseEntity<Response>(
@@ -64,7 +65,7 @@ public class Controller {
 
     @PostMapping("/")
     public ResponseEntity<Response> createUsuario(@RequestBody User usuario) {
-        int persisted = jdbc.insertar(usuario);
+        int persisted = new UserJDBC().insertar(usuario);
 
         if (persisted == 1) {
             return  new ResponseEntity<Response>(
@@ -91,7 +92,7 @@ public class Controller {
 
     @PutMapping("/")
     public ResponseEntity<Response> updateUsuario(@RequestBody User usuario) {
-        int result = jdbc.actualizar(usuario);
+        int result = new UserJDBC().actualizar(usuario);
         if (result == 1) {
             return  new ResponseEntity<Response>(
                     Response.builder()
@@ -117,7 +118,7 @@ public class Controller {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteUsuario(@PathVariable Integer id) {
-        int result = jdbc.eliminar(new User(id));
+        int result = new UserJDBC().eliminar(new User(id));
         if (result == 1) {
             return  new ResponseEntity<Response>(
                     Response.builder()
